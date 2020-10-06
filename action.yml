@@ -1,5 +1,16 @@
 name: 'Build-Deb'
 description: ''
+inputs:
+  variants:
+    required: false
+    description: list of variants to build
+    default: "default"
+  debVersion:
+    required: false
+    description: Alternate version string for package
+  pkgName:
+    required: false
+    description: Package name
 runs:
   using: 'docker'
   image: 'Dockerfile'
