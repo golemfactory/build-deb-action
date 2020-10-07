@@ -26,7 +26,7 @@ function process_variant() {
       if [ "$1" = "default" ]; then
         set_output "deb" "deb-target/debian/${INPUT_PKGNAME}_${INPUT_DEBVERSION}_amd64.deb"
       else
-        set_output "deb.$1" "deb-target/debian/${INPUT_PKGNAME}-$1_${INPUT_DEBVERSION}_amd64.deb"
+        set_output "deb_$1" "deb-target/debian/${INPUT_PKGNAME}-$1_${INPUT_DEBVERSION}_amd64.deb"
       fi
     fi
 }
