@@ -16,24 +16,24 @@ function cleanup() {
 }
 
 function process_variant() {
-    local _args
+    local _args _outp
     _args="deb"
     [ "$1" != "default" ] && _args="$_args --variant $1"
     [ -n "$INPUT_DEBVERSION" ] && _args="$_args --deb-version $INPUT_DEBVERSION"
     echo "cargo $_args" >&2
-    cargo $_args
+    _outp="$(cargo $_args | tail -1)"
     if [ -n "$INPUT_PKGNAME" ] && [ -n "$INPUT_DEBVERSION" ]; then
       if [ "$1" = "default" ]; then
-        set_output "deb" "deb-target/debian/${INPUT_PKGNAME}_${INPUT_DEBVERSION}_amd64.deb"
+        set_output "deb" "deb-${_outp#$PWD/}"
       else
-        set_output "deb_$1" "deb-target/debian/${INPUT_PKGNAME}-$1_${INPUT_DEBVERSION}_amd64.deb"
+        set_output "deb_$1" "deb-${_outp#$PWD/}"
       fi
     fi
 }
 
 function main() {
     local _var
-    cd "$GITHUB_WORKSPACE"
+    cd "$GITHUB_WORKSPACE" || return 1
     rustup default stable
 
     if test -d ./target; then
