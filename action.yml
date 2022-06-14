@@ -11,6 +11,9 @@ inputs:
   pkgName:
     required: false
     description: Package name
+  subdir:
+    required: false
+    description: directory where Cargo.toml is placed
 runs:
   using: 'docker'
   image: 'Dockerfile'
