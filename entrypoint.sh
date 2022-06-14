@@ -21,7 +21,12 @@ function process_variant() {
     [ "$1" != "default" ] && _args="$_args --variant $1"
     [ -n "$INPUT_DEBVERSION" ] && _args="$_args --deb-version $INPUT_DEBVERSION"
     echo "cargo $_args" >&2
-    _outp="$(cargo $_args | tail -1)"
+    if test -z "$INPUT_SUBDIR"; then
+    	_outp="$(cargo $_args | tail -1)"
+    else
+	_outp="$( (cd "$INPUT_SUBDIR" && cargo $_args | tail -1) )"
+    fi
+
     if [ -n "$INPUT_PKGNAME" ] && [ -n "$INPUT_DEBVERSION" ]; then
       if [ "$1" = "default" ]; then
         set_output "deb" "deb-${_outp#$PWD/}"
