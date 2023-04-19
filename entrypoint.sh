@@ -6,7 +6,7 @@ set -x
 PREV_TARGET=
 
 function set_output() {
-  printf "::set-output name=%s::%s\n" "$1" "$2"
+  printf "%s=%s\n" "$1" "$2" >> "$GITHUB_OUTPUT"
 }
 
 function cleanup() {
