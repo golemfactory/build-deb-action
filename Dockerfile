@@ -1,4 +1,6 @@
-FROM prekucki/ya-build-deb
+FROM docker.io/rust:1.68.2-buster
+
+RUN cargo install cargo-deb
 
 # We need newer version of cmake, than in default repository
 ADD https://cmake.org/files/v3.23/cmake-3.23.2-linux-x86_64.sh /cmake-3.23.2-linux-x86_64.sh
