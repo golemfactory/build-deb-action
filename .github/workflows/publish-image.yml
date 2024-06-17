@@ -15,7 +15,7 @@ on:
 # and a name for the Docker image that this workflow builds.
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: build-deb-action/build
+  IMAGE_NAME: golemfactory/build-deb-action/build
 
 # There is a single job in this workflow. It's configured to run on the latest available version of Ubuntu.
 jobs:
