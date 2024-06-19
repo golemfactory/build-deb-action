@@ -39,6 +39,9 @@ function process_variant() {
 function main() {
     local _var
     cd "$GITHUB_WORKSPACE" || return 1
+    git config --global --add safe.directory "$GITHUB_WORKSPACE"
+    git describe --tag --abbrev=0 "--match=v[0-9]*" "--match=pre-rel-v[0-9]*"
+
     rustup default stable
 
     if test -d ./target; then
