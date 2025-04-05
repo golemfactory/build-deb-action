@@ -1,4 +1,4 @@
-FROM docker.io/rust:1.77.0-buster
+FROM docker.io/rust:1.86.0-bullseye
 
 RUN cargo install cargo-deb
 
