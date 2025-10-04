@@ -1,11 +1,11 @@
-FROM docker.io/rust:1.86.0-bullseye
+FROM docker.io/rust:1.90.0-bullseye
 
 RUN cargo install cargo-deb
 
 # We need newer version of cmake, than in default repository
-ADD https://cmake.org/files/v3.23/cmake-3.23.2-linux-x86_64.sh /cmake-3.23.2-linux-x86_64.sh
+ADD https://github.com/Kitware/CMake/releases/download/v4.1.2/cmake-4.1.2-linux-x86_64.sh /cmake-4.1.2.sh
 RUN mkdir /opt/cmake
-RUN sh /cmake-3.23.2-linux-x86_64.sh --prefix=/opt/cmake --skip-license
+RUN sh /cmake-4.1.2.sh --prefix=/opt/cmake --skip-license
 RUN ln -s /opt/cmake/bin/cmake /usr/local/bin/cmake
 RUN cmake --version
 
